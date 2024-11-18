@@ -1,0 +1,18 @@
+#!/usr/bin/dash
+
+start_date=$(date +%Y-%m-%d)
+end_date=$(date -d "$start_date + 14 days" +%Y-%m-%d)
+
+echo ""
+
+awk -v start="$start_date" -v end="$end_date" ' 
+{
+	event_date = $1
+
+	if (event_date >= start && event_date <= end)
+	{
+		print $0
+	}
+}' $HOME/events.txt
+
+echo ""
